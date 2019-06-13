@@ -4,22 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="62c619999dca484d8f7589495ce18622" Name="Diagram1">
-        <EntityTypeShape EntityType="TorneioModel.Jogadores" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TorneioModel.Partidas" Width="1.5" PointX="8.25" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TorneioModel.Times" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TorneioModel.Torneios" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TorneioModel.Usuarios" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TorneioModel.Escalacoes" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+      <Diagram DiagramId="9d53d25c8e174013ba465d2fd02e2659" Name="Diagram1">
+        <EntityTypeShape EntityType="TorneioModel.Escalacoes" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TorneioModel.Jogadores" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="TorneioModel.Partidas" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TorneioModel.Times" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TorneioModel.Torneios" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TorneioModel.Torneios_Times" Width="1.5" PointX="6" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="TorneioModel.Usuarios" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TorneioModel.usuarios_times" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TorneioModel.usuarios_torneios" Width="1.5" PointX="6" PointY="3.125" IsExpanded="true" />
         <AssociationConnector Association="TorneioModel.FK_Escalacoes_Jogadores" ManuallyRouted="false" />
-        <AssociationConnector Association="TorneioModel.FK_Jogadores_Times" ManuallyRouted="false" />
         <AssociationConnector Association="TorneioModel.FK_Escalacoes_Partidas" ManuallyRouted="false" />
+        <AssociationConnector Association="TorneioModel.FK_Escalacoes_Times" ManuallyRouted="false" />
+        <AssociationConnector Association="TorneioModel.FK_Jogadores_Times" ManuallyRouted="false" />
         <AssociationConnector Association="TorneioModel.FK_Partidas_Times" ManuallyRouted="false" />
         <AssociationConnector Association="TorneioModel.FK_Partidas_Times1" ManuallyRouted="false" />
         <AssociationConnector Association="TorneioModel.FK_Partidas_Torneios" ManuallyRouted="false" />
-        <AssociationConnector Association="TorneioModel.FK_Escalacoes_Times" ManuallyRouted="false" />
-        <AssociationConnector Association="TorneioModel.Torneios_Times" ManuallyRouted="false" />
-        <AssociationConnector Association="TorneioModel.usuarios_torneios" ManuallyRouted="false" />
+        <AssociationConnector Association="TorneioModel.FK_Torneios_Times_Times" ManuallyRouted="false" />
+        <AssociationConnector Association="TorneioModel.FK_usuarios_times_Times" ManuallyRouted="false" />
+        <AssociationConnector Association="TorneioModel.FK_Torneios_Times_Torneios" ManuallyRouted="false" />
+        <AssociationConnector Association="TorneioModel.FK_usuarios_torneios_Torneios" ManuallyRouted="false" />
+        <AssociationConnector Association="TorneioModel.FK_usuarios_times_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="TorneioModel.FK_usuarios_torneios_Usuarios" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -25,11 +25,14 @@ namespace Torneio.model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Escalacoes> Escalacoes { get; set; }
         public virtual DbSet<Jogadores> Jogadores { get; set; }
         public virtual DbSet<Partidas> Partidas { get; set; }
         public virtual DbSet<Times> Times { get; set; }
         public virtual DbSet<Torneios> Torneios { get; set; }
+        public virtual DbSet<Torneios_Times> Torneios_Times { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
-        public virtual DbSet<Escalacoes> Escalacoes { get; set; }
+        public virtual DbSet<usuarios_times> usuarios_times { get; set; }
+        public virtual DbSet<usuarios_torneios> usuarios_torneios { get; set; }
     }
 }

@@ -17,11 +17,12 @@ namespace Torneio.model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Times()
         {
+            this.Escalacoes = new HashSet<Escalacoes>();
             this.Jogadores = new HashSet<Jogadores>();
             this.Partidas = new HashSet<Partidas>();
             this.Partidas1 = new HashSet<Partidas>();
-            this.Escalacoes = new HashSet<Escalacoes>();
-            this.Torneios = new HashSet<Torneios>();
+            this.Torneios_Times = new HashSet<Torneios_Times>();
+            this.usuarios_times = new HashSet<usuarios_times>();
         }
     
         public int ID { get; set; }
@@ -30,14 +31,16 @@ namespace Torneio.model
         public string Sigla { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Escalacoes> Escalacoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Jogadores> Jogadores { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Partidas> Partidas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Partidas> Partidas1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Escalacoes> Escalacoes { get; set; }
+        public virtual ICollection<Torneios_Times> Torneios_Times { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Torneios> Torneios { get; set; }
+        public virtual ICollection<usuarios_times> usuarios_times { get; set; }
     }
 }

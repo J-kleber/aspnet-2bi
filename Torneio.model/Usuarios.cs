@@ -17,7 +17,8 @@ namespace Torneio.model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuarios()
         {
-            this.Torneios = new HashSet<Torneios>();
+            this.usuarios_times = new HashSet<usuarios_times>();
+            this.usuarios_torneios = new HashSet<usuarios_torneios>();
         }
     
         public int ID { get; set; }
@@ -29,6 +30,8 @@ namespace Torneio.model
         public string Sobrenome { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Torneios> Torneios { get; set; }
+        public virtual ICollection<usuarios_times> usuarios_times { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<usuarios_torneios> usuarios_torneios { get; set; }
     }
 }

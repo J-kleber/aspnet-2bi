@@ -36,7 +36,6 @@ namespace Torneio.view.Views
         }
 
         // GET: Times/Create
-        [Authorize(Roles = "Organizador")]
         public ActionResult Create()
         {
             return View();
@@ -47,7 +46,6 @@ namespace Torneio.view.Views
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Organizador")]
         public ActionResult Create([Bind(Include = "ID,Nome,Emblema,Sigla")] Times times)
         {
             if (ModelState.IsValid)
@@ -61,7 +59,6 @@ namespace Torneio.view.Views
         }
 
         // GET: Times/Edit/5
-        [Authorize(Roles = "Organizador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -81,7 +78,6 @@ namespace Torneio.view.Views
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Organizador")]
         public ActionResult Edit([Bind(Include = "ID,Nome,Emblema,Sigla")] Times times)
         {
             if (ModelState.IsValid)
@@ -94,7 +90,6 @@ namespace Torneio.view.Views
         }
 
         // GET: Times/Delete/5
-        [Authorize(Roles = "Organizador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -112,7 +107,6 @@ namespace Torneio.view.Views
         // POST: Times/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Organizador")]
         public ActionResult DeleteConfirmed(int id)
         {
             Times times = db.Times.Find(id);

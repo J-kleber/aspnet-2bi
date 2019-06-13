@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Torneio.model;
-
+using Torneio.model.Models;
 namespace Torneio.view.Views
 {
     public class UsuariosController : Controller
@@ -46,10 +46,15 @@ namespace Torneio.view.Views
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Email,Senha,Tipo")] Usuarios usuarios)
+        public ActionResult Create([Bind(Include = "ID,Email,Senha,Tipo,Ativo,Nome,Sobrenome")] Usuarios usuarios)
         {
             if (ModelState.IsValid)
             {
+                usuarios_times oUsuarioTime = new usuarios_times();
+                oUsuarioTime.IDTime = 1;
+                oUsuarioTime.IDUsuario = 1;
+                UsuariosTimesController control = new UsuariosTimesController();
+                control.Create(oUsuarioTime);
                 db.Usuarios.Add(usuarios);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,7 +83,7 @@ namespace Torneio.view.Views
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Email,Senha,Tipo")] Usuarios usuarios)
+        public ActionResult Edit([Bind(Include = "ID,Email,Senha,Tipo,Ativo,Nome,Sobrenome")] Usuarios usuarios)
         {
             if (ModelState.IsValid)
             {

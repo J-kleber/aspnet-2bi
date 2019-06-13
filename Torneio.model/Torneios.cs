@@ -18,8 +18,8 @@ namespace Torneio.model
         public Torneios()
         {
             this.Partidas = new HashSet<Partidas>();
-            this.Times = new HashSet<Times>();
-            this.Usuarios = new HashSet<Usuarios>();
+            this.Torneios_Times = new HashSet<Torneios_Times>();
+            this.usuarios_torneios = new HashSet<usuarios_torneios>();
         }
     
         public int ID { get; set; }
@@ -31,8 +31,8 @@ namespace Torneio.model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Partidas> Partidas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Times> Times { get; set; }
+        public virtual ICollection<Torneios_Times> Torneios_Times { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuarios> Usuarios { get; set; }
+        public virtual ICollection<usuarios_torneios> usuarios_torneios { get; set; }
     }
 }

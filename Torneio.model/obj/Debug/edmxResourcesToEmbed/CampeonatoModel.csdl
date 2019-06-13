@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TorneioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Escalacoes">
+    <Key>
+      <PropertyRef Name="IDTime" />
+      <PropertyRef Name="IDPartida" />
+      <PropertyRef Name="IDJogador" />
+    </Key>
+    <Property Name="IDTime" Type="Int32" Nullable="false" />
+    <Property Name="IDPartida" Type="Int32" Nullable="false" />
+    <Property Name="IDJogador" Type="Int32" Nullable="false" />
+    <Property Name="Titular" Type="Boolean" Nullable="false" />
+    <Property Name="Posicao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Jogadores" Relationship="Self.FK_Escalacoes_Jogadores" FromRole="Escalacoes" ToRole="Jogadores" />
+    <NavigationProperty Name="Partidas" Relationship="Self.FK_Escalacoes_Partidas" FromRole="Escalacoes" ToRole="Partidas" />
+    <NavigationProperty Name="Times" Relationship="Self.FK_Escalacoes_Times" FromRole="Escalacoes" ToRole="Times" />
+  </EntityType>
+  <EntityType Name="Jogadores">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Idade" Type="Int32" Nullable="false" />
+    <Property Name="Nacionalidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DataNascimento" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IDTime" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Escalacoes" Relationship="Self.FK_Escalacoes_Jogadores" FromRole="Jogadores" ToRole="Escalacoes" />
+    <NavigationProperty Name="Times" Relationship="Self.FK_Jogadores_Times" FromRole="Jogadores" ToRole="Times" />
+  </EntityType>
+  <EntityType Name="Partidas">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDTorneio" Type="Int32" Nullable="false" />
+    <Property Name="IDTime1" Type="Int32" Nullable="false" />
+    <Property Name="IDTime2" Type="Int32" Nullable="false" />
+    <Property Name="Rodada" Type="Int32" Nullable="false" />
+    <Property Name="PlacarTime1" Type="Int32" Nullable="false" />
+    <Property Name="PlacarTime2" Type="Int32" Nullable="false" />
+    <Property Name="DataHora" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Escalacoes" Relationship="Self.FK_Escalacoes_Partidas" FromRole="Partidas" ToRole="Escalacoes" />
+    <NavigationProperty Name="Times" Relationship="Self.FK_Partidas_Times" FromRole="Partidas" ToRole="Times" />
+    <NavigationProperty Name="Times1" Relationship="Self.FK_Partidas_Times1" FromRole="Partidas" ToRole="Times" />
+    <NavigationProperty Name="Torneios" Relationship="Self.FK_Partidas_Torneios" FromRole="Partidas" ToRole="Torneios" />
+  </EntityType>
+  <EntityType Name="Times">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Emblema" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Sigla" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Escalacoes" Relationship="Self.FK_Escalacoes_Times" FromRole="Times" ToRole="Escalacoes" />
+    <NavigationProperty Name="Jogadores" Relationship="Self.FK_Jogadores_Times" FromRole="Times" ToRole="Jogadores" />
+    <NavigationProperty Name="Partidas" Relationship="Self.FK_Partidas_Times" FromRole="Times" ToRole="Partidas" />
+    <NavigationProperty Name="Partidas1" Relationship="Self.FK_Partidas_Times1" FromRole="Times" ToRole="Partidas" />
+    <NavigationProperty Name="Torneios" Relationship="Self.Torneios_Times" FromRole="Times" ToRole="Torneios" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.usuarios_times" FromRole="Times" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Torneios">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Premiacao" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ano" Type="Int32" Nullable="false" />
+    <Property Name="Realizador" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Partidas" Relationship="Self.FK_Partidas_Torneios" FromRole="Torneios" ToRole="Partidas" />
+    <NavigationProperty Name="Times" Relationship="Self.Torneios_Times" FromRole="Torneios" ToRole="Times" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.usuarios_torneios" FromRole="Torneios" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Senha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Ativo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Sobrenome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Times" Relationship="Self.usuarios_times" FromRole="Usuarios" ToRole="Times" />
+    <NavigationProperty Name="Torneios" Relationship="Self.usuarios_torneios" FromRole="Usuarios" ToRole="Torneios" />
+  </EntityType>
+  <Association Name="FK_Escalacoes_Jogadores">
+    <End Role="Jogadores" Type="Self.Jogadores" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Escalacoes" Type="Self.Escalacoes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Jogadores">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Escalacoes">
+        <PropertyRef Name="IDTime" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Escalacoes_Partidas">
+    <End Role="Partidas" Type="Self.Partidas" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Escalacoes" Type="Self.Escalacoes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Partidas">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Escalacoes">
+        <PropertyRef Name="IDPartida" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Escalacoes_Times">
+    <End Role="Times" Type="Self.Times" Multiplicity="1" />
+    <End Role="Escalacoes" Type="Self.Escalacoes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Times">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Escalacoes">
+        <PropertyRef Name="IDTime" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Jogadores_Times">
+    <End Role="Times" Type="Self.Times" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Jogadores" Type="Self.Jogadores" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Times">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Jogadores">
+        <PropertyRef Name="IDTime" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Partidas_Times">
+    <End Role="Times" Type="Self.Times" Multiplicity="1" />
+    <End Role="Partidas" Type="Self.Partidas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Times">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Partidas">
+        <PropertyRef Name="IDTime1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Partidas_Times1">
+    <End Role="Times" Type="Self.Times" Multiplicity="1" />
+    <End Role="Partidas" Type="Self.Partidas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Times">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Partidas">
+        <PropertyRef Name="IDTime2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Partidas_Torneios">
+    <End Role="Torneios" Type="Self.Torneios" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Partidas" Type="Self.Partidas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Torneios">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Partidas">
+        <PropertyRef Name="IDTorneio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Torneios_Times">
+    <End Role="Times" Type="Self.Times" Multiplicity="*" />
+    <End Role="Torneios" Type="Self.Torneios" Multiplicity="*" />
+  </Association>
+  <Association Name="usuarios_times">
+    <End Role="Times" Type="Self.Times" Multiplicity="*" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+  </Association>
+  <Association Name="usuarios_torneios">
+    <End Role="Torneios" Type="Self.Torneios" Multiplicity="*" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="TorneioEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Escalacoes" EntityType="Self.Escalacoes" />
+    <EntitySet Name="Jogadores" EntityType="Self.Jogadores" />
+    <EntitySet Name="Partidas" EntityType="Self.Partidas" />
+    <EntitySet Name="Times" EntityType="Self.Times" />
+    <EntitySet Name="Torneios" EntityType="Self.Torneios" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+    <AssociationSet Name="FK_Escalacoes_Jogadores" Association="Self.FK_Escalacoes_Jogadores">
+      <End Role="Jogadores" EntitySet="Jogadores" />
+      <End Role="Escalacoes" EntitySet="Escalacoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Escalacoes_Partidas" Association="Self.FK_Escalacoes_Partidas">
+      <End Role="Partidas" EntitySet="Partidas" />
+      <End Role="Escalacoes" EntitySet="Escalacoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Escalacoes_Times" Association="Self.FK_Escalacoes_Times">
+      <End Role="Times" EntitySet="Times" />
+      <End Role="Escalacoes" EntitySet="Escalacoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Jogadores_Times" Association="Self.FK_Jogadores_Times">
+      <End Role="Times" EntitySet="Times" />
+      <End Role="Jogadores" EntitySet="Jogadores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Partidas_Times" Association="Self.FK_Partidas_Times">
+      <End Role="Times" EntitySet="Times" />
+      <End Role="Partidas" EntitySet="Partidas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Partidas_Times1" Association="Self.FK_Partidas_Times1">
+      <End Role="Times" EntitySet="Times" />
+      <End Role="Partidas" EntitySet="Partidas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Partidas_Torneios" Association="Self.FK_Partidas_Torneios">
+      <End Role="Torneios" EntitySet="Torneios" />
+      <End Role="Partidas" EntitySet="Partidas" />
+    </AssociationSet>
+    <AssociationSet Name="Torneios_Times" Association="Self.Torneios_Times">
+      <End Role="Times" EntitySet="Times" />
+      <End Role="Torneios" EntitySet="Torneios" />
+    </AssociationSet>
+    <AssociationSet Name="usuarios_times" Association="Self.usuarios_times">
+      <End Role="Times" EntitySet="Times" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="usuarios_torneios" Association="Self.usuarios_torneios">
+      <End Role="Torneios" EntitySet="Torneios" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

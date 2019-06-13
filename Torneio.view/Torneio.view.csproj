@@ -164,6 +164,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ContaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UsuariosTimesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -173,8 +174,8 @@
     <Compile Include="Controllers\JogadoresController.cs" />
     <Compile Include="Controllers\PartidasController.cs" />
     <Compile Include="Controllers\TimesController.cs" />
-    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\TorneiosController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -255,16 +256,8 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Times\Create.cshtml" />
-    <Content Include="Views\Times\Delete.cshtml" />
-    <Content Include="Views\Times\Details.cshtml" />
-    <Content Include="Views\Times\Edit.cshtml" />
-    <Content Include="Views\Times\Index.cshtml" />
-    <Content Include="Views\Partidas\Create.cshtml" />
-    <Content Include="Views\Partidas\Delete.cshtml" />
-    <Content Include="Views\Partidas\Details.cshtml" />
-    <Content Include="Views\Partidas\Edit.cshtml" />
-    <Content Include="Views\Partidas\Index.cshtml" />
+    <Content Include="Views\Conta\Login.cshtml" />
+    <Content Include="Views\Conta\Painel.cshtml" />
     <Content Include="Views\Jogadores\Create.cshtml" />
     <Content Include="Views\Jogadores\Delete.cshtml" />
     <Content Include="Views\Jogadores\Details.cshtml" />
@@ -275,18 +268,26 @@
     <Content Include="Views\Escalacoes\Details.cshtml" />
     <Content Include="Views\Escalacoes\Edit.cshtml" />
     <Content Include="Views\Escalacoes\Index.cshtml" />
-    <Content Include="Views\Usuarios\Create.cshtml" />
-    <Content Include="Views\Usuarios\Delete.cshtml" />
-    <Content Include="Views\Usuarios\Details.cshtml" />
-    <Content Include="Views\Usuarios\Edit.cshtml" />
-    <Content Include="Views\Usuarios\Index.cshtml" />
-    <Content Include="Views\Conta\Login.cshtml" />
+    <Content Include="Views\Partidas\Create.cshtml" />
+    <Content Include="Views\Partidas\Delete.cshtml" />
+    <Content Include="Views\Partidas\Details.cshtml" />
+    <Content Include="Views\Partidas\Edit.cshtml" />
+    <Content Include="Views\Partidas\Index.cshtml" />
+    <Content Include="Views\Times\Create.cshtml" />
+    <Content Include="Views\Times\Delete.cshtml" />
+    <Content Include="Views\Times\Details.cshtml" />
+    <Content Include="Views\Times\Edit.cshtml" />
+    <Content Include="Views\Times\Index.cshtml" />
     <Content Include="Views\Torneios\Create.cshtml" />
     <Content Include="Views\Torneios\Delete.cshtml" />
     <Content Include="Views\Torneios\Details.cshtml" />
     <Content Include="Views\Torneios\Edit.cshtml" />
     <Content Include="Views\Torneios\Index.cshtml" />
-    <Content Include="Views\Conta\Painel.cshtml" />
+    <Content Include="Views\Usuarios\Create.cshtml" />
+    <Content Include="Views\Usuarios\Delete.cshtml" />
+    <Content Include="Views\Usuarios\Details.cshtml" />
+    <Content Include="Views\Usuarios\Edit.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
