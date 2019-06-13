@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TorneioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TorneioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Escalacoes">
           <Key>
             <PropertyRef Name="IDTime" />
@@ -217,7 +217,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_usuarios_times_Times">
-          <End Role="Times" Type="Self.Times" Multiplicity="1" />
+          <End Role="Times" Type="Self.Times" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="usuarios_times" Type="Self.usuarios_times" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Times">
@@ -229,7 +231,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_usuarios_times_Usuarios">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="usuarios_times" Type="Self.usuarios_times" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">
@@ -331,8 +335,7 @@
             <End Role="usuarios_torneios" EntitySet="usuarios_torneios" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TorneioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">

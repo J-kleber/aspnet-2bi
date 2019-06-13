@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Torneio.model;
 
-namespace Torneio.view.Views
+namespace Torneio.view.Controllers
 {
 
     public class ContaController : Controller

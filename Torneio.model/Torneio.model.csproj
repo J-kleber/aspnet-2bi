@@ -70,7 +70,6 @@
     <Compile Include="Jogadores.cs">
       <DependentUpon>CampeonatoModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\usuarios_times.cs" />
     <Compile Include="Partidas.cs">
       <DependentUpon>CampeonatoModel.tt</DependentUpon>
     </Compile>
@@ -97,6 +96,7 @@
   <ItemGroup>
     <Folder Include="Helper\" />
     <Folder Include="Interfaces\" />
+    <Folder Include="Models\" />
     <Folder Include="Partial\" />
     <Folder Include="Repositories\" />
   </ItemGroup>

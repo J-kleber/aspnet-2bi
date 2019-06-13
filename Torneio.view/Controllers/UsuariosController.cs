@@ -7,8 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Torneio.model;
-using Torneio.model.Models;
-namespace Torneio.view.Views
+namespace Torneio.view.Controllers
 {
     public class UsuariosController : Controller
     {
@@ -50,11 +49,6 @@ namespace Torneio.view.Views
         {
             if (ModelState.IsValid)
             {
-                usuarios_times oUsuarioTime = new usuarios_times();
-                oUsuarioTime.IDTime = 1;
-                oUsuarioTime.IDUsuario = 1;
-                UsuariosTimesController control = new UsuariosTimesController();
-                control.Create(oUsuarioTime);
                 db.Usuarios.Add(usuarios);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -119,7 +113,10 @@ namespace Torneio.view.Views
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        public Usuarios getUsuario(string email)
+        {
+            return (from p in db.Usuarios where p.Email == email select p).FirstOrDefault();
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

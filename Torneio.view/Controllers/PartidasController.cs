@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Torneio.model;
 
-namespace Torneio.view.Views
+namespace Torneio.view.Controllers
 {
     public class PartidasController : Controller
     {

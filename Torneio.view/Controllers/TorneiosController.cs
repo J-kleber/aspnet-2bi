@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Torneio.model;
 
-namespace Torneio.view.Views
+namespace Torneio.view.Controllers
 {
     public class TorneiosController : Controller
     {
@@ -17,7 +17,16 @@ namespace Torneio.view.Views
         // GET: Torneios
         public ActionResult Index()
         {
-            return View(db.Torneios.ToList());
+            List<usuarios_torneios> idsTorneios = (from p in db.usuarios_torneios where p.IDUsuario == 1 select p).ToList();
+            List<Torneios> listaTorneios = new List<Torneios>();
+            foreach(var id in idsTorneios)
+            {
+                listaTorneios.Add((from p in db.Torneios where p.ID == id.IDTorneio select p).FirstOrDefault());
+            }
+
+
+
+            return View(listaTorneios);
         }
 
         // GET: Torneios/Details/5
@@ -46,11 +55,13 @@ namespace Torneio.view.Views
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Nome,Premiacao,Ano,Realizador")] Torneios torneios)
+        public ActionResult Create([Bind(Include = "ID,Nome,Premiacao,Ano,Realizador")] Torneios torneios, [Bind(Include = "IdUsuario")] usuarios_torneios usuarioTorneio)
         {
             if (ModelState.IsValid)
             {
                 db.Torneios.Add(torneios);
+                usuarioTorneio.IDTorneio = torneios.ID;
+                db.usuarios_torneios.Add(usuarioTorneio);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

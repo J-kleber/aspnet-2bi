@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Torneio.model;
 
-namespace Torneio.view.Views
+namespace Torneio.view.Controllers
 {
     public class TimesController : Controller
     {
@@ -17,7 +17,17 @@ namespace Torneio.view.Views
         // GET: Times
         public ActionResult Index()
         {
-            return View(db.Times.ToList());
+            List<usuarios_times> idsTimes = (from p in db.usuarios_times where p.IDUsuario == 1 select p).ToList();
+            List<Times> listaTimes = new List<Times>();
+            foreach (var id in idsTimes)
+            {
+                listaTimes.Add((from p in db.Times where p.ID == id.IDTime select p).FirstOrDefault());
+            }
+
+
+
+            return View(listaTimes);
+            //return View(db.Times.ToList());
         }
 
         // GET: Times/Details/5
@@ -46,11 +56,14 @@ namespace Torneio.view.Views
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Nome,Emblema,Sigla")] Times times)
+        public ActionResult Create([Bind(Include = "ID,Nome,Emblema,Sigla")] Times times, [Bind(Include = "IdUsuario")] usuarios_times usuarioTime)
         {
             if (ModelState.IsValid)
             {
+                
                 db.Times.Add(times);
+                usuarioTime.IDTime = times.ID;
+                db.usuarios_times.Add(usuarioTime);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -113,6 +126,12 @@ namespace Torneio.view.Views
             db.Times.Remove(times);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public Times getTime(int idUsuario)
+        {
+            int idTime = (from p in db.usuarios_times where p.IDUsuario == idUsuario select p.IDTime).FirstOrDefault();
+            return (from p in db.Times where p.ID == idTime select p).FirstOrDefault();
         }
 
         protected override void Dispose(bool disposing)

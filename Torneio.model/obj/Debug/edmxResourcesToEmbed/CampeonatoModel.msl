@@ -59,6 +59,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Torneios_Times">
+      <EntityTypeMapping TypeName="TorneioModel.Torneios_Times">
+        <MappingFragment StoreEntitySet="Torneios_Times">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IDTorneio" ColumnName="IDTorneio" />
+          <ScalarProperty Name="IDTime" ColumnName="IDTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Usuarios">
       <EntityTypeMapping TypeName="TorneioModel.Usuarios">
         <MappingFragment StoreEntitySet="Usuarios">
@@ -72,29 +81,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="Torneios_Times" TypeName="TorneioModel.Torneios_Times" StoreEntitySet="Torneios_Times">
-      <EndProperty Name="Times">
-        <ScalarProperty Name="ID" ColumnName="IDTime" />
-      </EndProperty>
-      <EndProperty Name="Torneios">
-        <ScalarProperty Name="ID" ColumnName="IDTorneio" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="usuarios_times" TypeName="TorneioModel.usuarios_times" StoreEntitySet="usuarios_times">
-      <EndProperty Name="Times">
-        <ScalarProperty Name="ID" ColumnName="IDTime" />
-      </EndProperty>
-      <EndProperty Name="Usuarios">
-        <ScalarProperty Name="ID" ColumnName="IDUsuario" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="usuarios_torneios" TypeName="TorneioModel.usuarios_torneios" StoreEntitySet="usuarios_torneios">
-      <EndProperty Name="Torneios">
-        <ScalarProperty Name="ID" ColumnName="IDTorneio" />
-      </EndProperty>
-      <EndProperty Name="Usuarios">
-        <ScalarProperty Name="ID" ColumnName="IDUsuario" />
-      </EndProperty>
-    </AssociationSetMapping>
+    <EntitySetMapping Name="usuarios_times">
+      <EntityTypeMapping TypeName="TorneioModel.usuarios_times">
+        <MappingFragment StoreEntitySet="usuarios_times">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+          <ScalarProperty Name="IDTime" ColumnName="IDTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuarios_torneios">
+      <EntityTypeMapping TypeName="TorneioModel.usuarios_torneios">
+        <MappingFragment StoreEntitySet="usuarios_torneios">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+          <ScalarProperty Name="IDTorneio" ColumnName="IDTorneio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

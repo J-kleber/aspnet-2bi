@@ -57,9 +57,9 @@
   </EntityType>
   <EntityType Name="Torneios_Times">
     <Key>
-      <PropertyRef Name="IDTorneio" />
-      <PropertyRef Name="IDTime" />
+      <PropertyRef Name="ID" />
     </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IDTorneio" Type="int" Nullable="false" />
     <Property Name="IDTime" Type="int" Nullable="false" />
   </EntityType>
@@ -77,17 +77,17 @@
   </EntityType>
   <EntityType Name="usuarios_times">
     <Key>
-      <PropertyRef Name="IDUsuario" />
-      <PropertyRef Name="IDTime" />
+      <PropertyRef Name="ID" />
     </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IDUsuario" Type="int" Nullable="false" />
     <Property Name="IDTime" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="usuarios_torneios">
     <Key>
-      <PropertyRef Name="IDUsuario" />
-      <PropertyRef Name="IDTorneio" />
+      <PropertyRef Name="ID" />
     </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IDUsuario" Type="int" Nullable="false" />
     <Property Name="IDTorneio" Type="int" Nullable="false" />
   </EntityType>
@@ -212,7 +212,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_usuarios_times_Times">
-    <End Role="Times" Type="Self.Times" Multiplicity="1" />
+    <End Role="Times" Type="Self.Times" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="usuarios_times" Type="Self.usuarios_times" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Times">
@@ -224,7 +226,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_usuarios_times_Usuarios">
-    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="usuarios_times" Type="Self.usuarios_times" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Usuarios">
