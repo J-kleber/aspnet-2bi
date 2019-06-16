@@ -55,13 +55,23 @@ namespace Torneio.view.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Nome,Premiacao,Ano,Realizador")] Torneios torneios, [Bind(Include = "IdUsuario")] usuarios_torneios usuarioTorneio)
+        public ActionResult Create([Bind(Include = "ID,Nome,Premiacao,Ano,Realizador")] Torneios torneios, [Bind(Include = "IdUsuario")] usuarios_torneios usuarioTorneio, IEnumerable<int> IDTime)
         {
             if (ModelState.IsValid)
             {
+                var item = db.Times.ToList();
                 db.Torneios.Add(torneios);
                 usuarioTorneio.IDTorneio = torneios.ID;
                 db.usuarios_torneios.Add(usuarioTorneio);
+              
+                foreach(var id in IDTime)
+                {
+                    Torneios_Times torneioTimes = new Torneios_Times();
+                    torneioTimes.IDTorneio = torneios.ID;
+                    torneioTimes.IDTime = id;
+                    db.Torneios_Times.Add(torneioTimes);
+                }
+               
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

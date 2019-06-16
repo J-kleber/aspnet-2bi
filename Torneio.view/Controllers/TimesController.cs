@@ -134,6 +134,11 @@ namespace Torneio.view.Controllers
             return (from p in db.Times where p.ID == idTime select p).FirstOrDefault();
         }
 
+        public List<Times> selecionaTodos(int idUsuario)
+        {
+            return (from p in db.Times join a in db.usuarios_times on p.ID equals a.IDTime where a.IDUsuario == idUsuario select p).ToList();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
