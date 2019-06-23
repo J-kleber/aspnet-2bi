@@ -4,6 +4,7 @@
     ViewBag.Title = "Create";
     UsuariosController ousuario = new UsuariosController();
     int idUsuario = 0;
+    TimesController oTimes = new TimesController();
     if (User.Identity.IsAuthenticated)
     {
         idUsuario = ousuario.getUsuario(User.Identity.Name).ID;
@@ -60,7 +61,19 @@
                 <span class="field-validation-valid text-danger" data-valmsg-for="IdUsuario" data-valmsg-replace="true"></span>
             </div>
         </div>
+        <div class="form-row">
+            @{
+                foreach (var time in oTimes.selecionaTodos(idUsuario))
+                {
 
+                    <div class="col-md-1">
+                        <input type="checkbox" class="form-check-input" id="IDTime[]" name="IDTime[]" value="@time.ID">
+                        <label class="form-check-label" for="exampleCheck1">@time.Nome</label>
+                    </div>
+
+                }
+            }
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />

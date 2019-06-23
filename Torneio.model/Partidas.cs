@@ -25,9 +25,9 @@ namespace Torneio.model
         public int IDTime1 { get; set; }
         public int IDTime2 { get; set; }
         public int Rodada { get; set; }
-        public int PlacarTime1 { get; set; }
-        public int PlacarTime2 { get; set; }
-        public System.DateTime DataHora { get; set; }
+        public Nullable<int> PlacarTime1 { get; set; }
+        public Nullable<int> PlacarTime2 { get; set; }
+        public Nullable<System.DateTime> DataHora { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Escalacoes> Escalacoes { get; set; }

@@ -22,3 +22,15 @@ C:\Users\T-Gamer\Desktop\torneio.view\Torneio.model\obj\Debug\Torneio.model.cspr
 C:\Users\T-Gamer\Desktop\torneio.view\Torneio.model\obj\Debug\Torneio.model.csproj.CopyComplete
 C:\Users\T-Gamer\Desktop\torneio.view\Torneio.model\obj\Debug\Torneio.model.dll
 C:\Users\T-Gamer\Desktop\torneio.view\Torneio.model\obj\Debug\Torneio.model.pdb
+C:\Users\welli\source\repos\aspnet-2bi\Torneio.model\bin\Debug\Torneio.model.dll.config
+C:\Users\welli\source\repos\aspnet-2bi\Torneio.model\bin\Debug\Torneio.model.dll
+C:\Users\welli\source\repos\aspnet-2bi\Torneio.model\bin\Debug\Torneio.model.pdb
+C:\Users\welli\source\repos\aspnet-2bi\Torneio.model\bin\Debug\EntityFramework.dll
+C:\Users\welli\source\repos\aspnet-2bi\Torneio.model\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\welli\source\repos\aspnet-2bi\Torneio.model\bin\Debug\EntityFramework.xml
+C:\Users\welli\source\repos\aspnet-2bi\Torneio.model\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\welli\source\repos\aspnet-2bi\Torneio.model\obj\Debug\Torneio.model.csprojAssemblyReference.cache
+C:\Users\welli\source\repos\aspnet-2bi\Torneio.model\obj\Debug\Torneio.model.csproj.CoreCompileInputs.cache
+C:\Users\welli\source\repos\aspnet-2bi\Torneio.model\obj\Debug\Torneio.model.csproj.CopyComplete
+C:\Users\welli\source\repos\aspnet-2bi\Torneio.model\obj\Debug\Torneio.model.dll
+C:\Users\welli\source\repos\aspnet-2bi\Torneio.model\obj\Debug\Torneio.model.pdb

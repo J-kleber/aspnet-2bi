@@ -37,9 +37,9 @@
           <Property Name="IDTime1" Type="int" Nullable="false" />
           <Property Name="IDTime2" Type="int" Nullable="false" />
           <Property Name="Rodada" Type="int" Nullable="false" />
-          <Property Name="PlacarTime1" Type="int" Nullable="false" />
-          <Property Name="PlacarTime2" Type="int" Nullable="false" />
-          <Property Name="DataHora" Type="datetime" Nullable="false" />
+          <Property Name="PlacarTime1" Type="int" />
+          <Property Name="PlacarTime2" Type="int" />
+          <Property Name="DataHora" Type="datetime" />
         </EntityType>
         <EntityType Name="Times">
           <Key>
@@ -217,9 +217,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_usuarios_times_Times">
-          <End Role="Times" Type="Self.Times" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Times" Type="Self.Times" Multiplicity="1" />
           <End Role="usuarios_times" Type="Self.usuarios_times" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Times">
@@ -231,9 +229,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_usuarios_times_Usuarios">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
           <End Role="usuarios_times" Type="Self.usuarios_times" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">
@@ -376,9 +372,9 @@
           <Property Name="IDTime1" Type="Int32" Nullable="false" />
           <Property Name="IDTime2" Type="Int32" Nullable="false" />
           <Property Name="Rodada" Type="Int32" Nullable="false" />
-          <Property Name="PlacarTime1" Type="Int32" Nullable="false" />
-          <Property Name="PlacarTime2" Type="Int32" Nullable="false" />
-          <Property Name="DataHora" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PlacarTime1" Type="Int32" />
+          <Property Name="PlacarTime2" Type="Int32" />
+          <Property Name="DataHora" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Escalacoes" Relationship="Self.FK_Escalacoes_Partidas" FromRole="Partidas" ToRole="Escalacoes" />
           <NavigationProperty Name="Times" Relationship="Self.FK_Partidas_Times" FromRole="Partidas" ToRole="Times" />
           <NavigationProperty Name="Times1" Relationship="Self.FK_Partidas_Times1" FromRole="Partidas" ToRole="Times" />
