@@ -15,6 +15,7 @@ namespace Torneio.view.Controllers
         private TorneioEntities db = new TorneioEntities();
 
         // GET: Partidas
+        [Authorize(Roles = "Organizador")]
         public ActionResult Index()
         {
             var partidas = db.Partidas.Include(p => p.Times).Include(p => p.Times1).Include(p => p.Torneios);
@@ -22,6 +23,7 @@ namespace Torneio.view.Controllers
         }
 
         // GET: Partidas/Details/5
+        [Authorize(Roles = "Organizador")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace Torneio.view.Controllers
         }
 
         // GET: Partidas/Create
+        [Authorize(Roles = "Organizador")]
         public ActionResult Create()
         {
             ViewBag.IDTime1 = new SelectList(db.Times, "ID", "Nome");
@@ -50,6 +53,7 @@ namespace Torneio.view.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Organizador")]
         public ActionResult Create([Bind(Include = "ID,IDTorneio,IDTime1,IDTime2,Rodada,PlacarTime1,PlacarTime2,DataHora")] Partidas partidas)
         {
             if (ModelState.IsValid)
@@ -66,6 +70,7 @@ namespace Torneio.view.Controllers
         }
 
         // GET: Partidas/Edit/5
+        [Authorize(Roles = "Organizador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -88,6 +93,7 @@ namespace Torneio.view.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Organizador")]
         public ActionResult Edit([Bind(Include = "ID,IDTorneio,IDTime1,IDTime2,Rodada,PlacarTime1,PlacarTime2,DataHora")] Partidas partidas)
         {
             if (ModelState.IsValid)
@@ -103,6 +109,7 @@ namespace Torneio.view.Controllers
         }
 
         // GET: Partidas/Delete/5
+        [Authorize(Roles = "Organizador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -118,6 +125,7 @@ namespace Torneio.view.Controllers
         }
 
         // POST: Partidas/Delete/5
+        [Authorize(Roles = "Organizador")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
