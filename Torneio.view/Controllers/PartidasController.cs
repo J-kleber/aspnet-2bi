@@ -16,10 +16,20 @@ namespace Torneio.view.Controllers
 
         // GET: Partidas
         [Authorize(Roles = "Organizador")]
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var partidas = db.Partidas.Include(p => p.Times).Include(p => p.Times1).Include(p => p.Torneios);
-            return View(partidas.ToList());
+            if(id > 0)
+            {
+                var partidas = db.Partidas.Include(p => p.Times).Include(p => p.Times1).Include(p => p.Torneios).Where(p => p.IDTorneio == id);
+                return View(partidas.ToList());
+            }
+            else
+            {
+                var partidas = db.Partidas.Include(p => p.Times).Include(p => p.Times1).Include(p => p.Torneios);
+                return View(partidas.ToList());
+            }
+          
+            
         }
 
         // GET: Partidas/Details/5
@@ -100,12 +110,13 @@ namespace Torneio.view.Controllers
             {
                 db.Entry(partidas).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index/"+partidas.IDTorneio);
             }
             ViewBag.IDTime1 = new SelectList(db.Times, "ID", "Nome", partidas.IDTime1);
             ViewBag.IDTime2 = new SelectList(db.Times, "ID", "Nome", partidas.IDTime2);
             ViewBag.IDTorneio = new SelectList(db.Torneios, "ID", "Nome", partidas.IDTorneio);
-            return View(partidas);
+            return RedirectToAction("Index/" +partidas.IDTorneio);
+            //return View(partidas);
         }
 
         // GET: Partidas/Delete/5
@@ -133,7 +144,7 @@ namespace Torneio.view.Controllers
             Partidas partidas = db.Partidas.Find(id);
             db.Partidas.Remove(partidas);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index/"+partidas.IDTorneio);
         }
 
         protected override void Dispose(bool disposing)
