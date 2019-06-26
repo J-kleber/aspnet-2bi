@@ -71,10 +71,12 @@
       <DependentUpon>CampeonatoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tabela.cs" />
+    <Compile Include="Models\TimesPartidas.cs" />
     <Compile Include="Partidas.cs">
       <DependentUpon>CampeonatoModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\PartidaRepository.cs" />
     <Compile Include="Repositories\TabelaRepository.cs" />
     <Compile Include="Repositories\TimeRepository.cs" />
     <Compile Include="Times.cs">

@@ -2,7 +2,6 @@
 @using Torneio.view.Controllers;
 @{
     ViewBag.Title = "Create";
-    ViewBag.Title = "Create";
     UsuariosController ousuario = new UsuariosController();
     int idTime = 0;
     if (User.Identity.IsAuthenticated)
@@ -51,7 +50,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.DataNascimento, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.DataNascimento, new { htmlAttributes = new { @class = "form-control" } })
+            <input class="form-control text-box single-line valid" data-val="true" data-val-date="O campo DataNascimento deve ser uma data." data-val-required="O campo DataNascimento é obrigatório." id="DataNascimento" name="DataNascimento" type="date" value="" aria-describedby="DataNascimento-error" aria-invalid="false">
             @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })
         </div>
     </div>

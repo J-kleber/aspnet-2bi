@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Torneio.model.Models.TimesPartidas>
+@{
+    ViewBag.Title = "index";
+    int idTorneio = 0;
+}
+<h2>index</h2>
+<table class="table">
+    <thead class="thead-dark">
+    <th scope="col">Rodada</th>
+    <th scope="col">Time</th>
+    <th scope="col">gols</th>
+    <th scope="col">gols</th>
+    <th scope="col">time</th>
+    <th scope="col">Data</th>
+    </thead>
+    <tbody>
+        @{
+            foreach (var dados in Model)
+            {
+                if(idTorneio != dados.IDTorneio)
+                {
+                    idTorneio = dados.IDTorneio;
+                    <tr>
+                        <td colspan="6" class="bg-info">@dados.TorneioNome</td>
+                    </tr>
+                }
+                <tr>
+                    <td>@dados.Rodada</td>
+                    <td>@dados.TimeCasa</td>
+                    <td>@dados.PlacarTime1</td>
+                    <td>@dados.PlacarTime2</td>
+                    <td>@dados.TimeFora</td>
+                    <td>@dados.DataHora</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

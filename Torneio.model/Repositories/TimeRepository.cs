@@ -10,11 +10,11 @@ namespace Torneio.model.Repositories
     {
         private TorneioEntities db = new TorneioEntities();
 
-        /*public Times getTime(int idUsuario)
+        public Times getTime(int idUsuario)
         {
             int idTime = (from p in db.usuarios_times where p.IDUsuario == idUsuario select p.IDTime).FirstOrDefault();
             return (from p in db.Times where p.ID == idTime select p).FirstOrDefault();
-        }*/
+        }
 
         public List<Times> selecionaTodos(int idUsuario)
         {

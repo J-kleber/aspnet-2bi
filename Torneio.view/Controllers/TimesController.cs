@@ -147,6 +147,11 @@ namespace Torneio.view.Controllers
             return this.repository.selecionaTodos(idUsuario);
         }
 
+        public Times getTime(int idUsuario)
+        {
+            return this.repository.getTime(idUsuario);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
