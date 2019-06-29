@@ -15,13 +15,25 @@ namespace Torneio.view.Controllers
         private TorneioEntities db = new TorneioEntities();
 
         // GET: Partidas
-        public ActionResult Index()
+        [Authorize(Roles = "Organizador")]
+        public ActionResult Index(int? id)
         {
-            var partidas = db.Partidas.Include(p => p.Times).Include(p => p.Times1).Include(p => p.Torneios);
-            return View(partidas.ToList());
+            if(id > 0)
+            {
+                var partidas = db.Partidas.Include(p => p.Times).Include(p => p.Times1).Include(p => p.Torneios).Where(p => p.IDTorneio == id);
+                return View(partidas.ToList());
+            }
+            else
+            {
+                var partidas = db.Partidas.Include(p => p.Times).Include(p => p.Times1).Include(p => p.Torneios);
+                return View(partidas.ToList());
+            }
+          
+            
         }
 
         // GET: Partidas/Details/5
+        [Authorize(Roles = "Organizador")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +49,7 @@ namespace Torneio.view.Controllers
         }
 
         // GET: Partidas/Create
+        [Authorize(Roles = "Organizador")]
         public ActionResult Create()
         {
             ViewBag.IDTime1 = new SelectList(db.Times, "ID", "Nome");
@@ -50,6 +63,7 @@ namespace Torneio.view.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Organizador")]
         public ActionResult Create([Bind(Include = "ID,IDTorneio,IDTime1,IDTime2,Rodada,PlacarTime1,PlacarTime2,DataHora")] Partidas partidas)
         {
             if (ModelState.IsValid)
@@ -66,6 +80,7 @@ namespace Torneio.view.Controllers
         }
 
         // GET: Partidas/Edit/5
+        [Authorize(Roles = "Organizador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -88,21 +103,24 @@ namespace Torneio.view.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Organizador")]
         public ActionResult Edit([Bind(Include = "ID,IDTorneio,IDTime1,IDTime2,Rodada,PlacarTime1,PlacarTime2,DataHora")] Partidas partidas)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(partidas).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index/"+partidas.IDTorneio);
             }
             ViewBag.IDTime1 = new SelectList(db.Times, "ID", "Nome", partidas.IDTime1);
             ViewBag.IDTime2 = new SelectList(db.Times, "ID", "Nome", partidas.IDTime2);
             ViewBag.IDTorneio = new SelectList(db.Torneios, "ID", "Nome", partidas.IDTorneio);
-            return View(partidas);
+            return RedirectToAction("Index/" +partidas.IDTorneio);
+            //return View(partidas);
         }
 
         // GET: Partidas/Delete/5
+        [Authorize(Roles = "Organizador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -118,6 +136,7 @@ namespace Torneio.view.Controllers
         }
 
         // POST: Partidas/Delete/5
+        [Authorize(Roles = "Organizador")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -125,7 +144,7 @@ namespace Torneio.view.Controllers
             Partidas partidas = db.Partidas.Find(id);
             db.Partidas.Remove(partidas);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index/"+partidas.IDTorneio);
         }
 
         protected override void Dispose(bool disposing)

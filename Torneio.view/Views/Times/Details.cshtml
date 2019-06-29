@@ -4,39 +4,28 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>Times</h4>
+    <h4>Detalhes do Time</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Emblema)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Emblema)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sigla)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sigla)
-        </dd>
-
-    </dl>
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th width="10%">@Html.DisplayNameFor(model => model.Nome)</th>
+                <td>@Html.DisplayFor(model => model.Nome)</td>
+            </tr>
+            <tr>
+                <th width="10%">@Html.DisplayNameFor(model => model.Sigla)</th>
+                <td>@Html.DisplayFor(model => model.Sigla)</td>
+            </tr>
+            <tr>
+                <th width="10%">@Html.DisplayNameFor(model => model.Emblema)</th>
+                <td>@Html.DisplayFor(model => model.Emblema)</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a class="btn btn-light" href="@Url.Action("Index")"><i class="fas fa-arrow-left"></i> Voltar</a> &nbsp;
+    <a class="btn btn-info" href="@Url.Action("Edit", new { id = Model.ID })"><i class="fas fa-edit"></i> Editar</a>
 </p>

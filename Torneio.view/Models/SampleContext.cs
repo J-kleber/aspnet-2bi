@@ -9,6 +9,6 @@ namespace Torneio.view.Models
 {
     public class SampleContext : DbContext
     {
-        public DbSet<Tabela> Tabela { get; set; }
+        //public DbSet<Tabela> Tabela { get; set; }
     }
 }

@@ -66,7 +66,7 @@ namespace Torneio.view.Controllers
                                 /*código abaixo cria uma session para armazenar o sobrenome do usuário*/
                                 Session["Sobrenome"] = vLogin.Sobrenome;
                                 /*retorna para a tela inicial do Home*/
-                                return RedirectToAction("Index", "Home");
+                                return RedirectToAction("Painel", "Conta");
                             }
                             /*Else responsável da validação da senha*/
                             else

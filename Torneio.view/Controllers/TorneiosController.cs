@@ -7,6 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Torneio.model;
+using Torneio.model.Models;
+using Torneio.model.Repositories;
+
 
 namespace Torneio.view.Controllers
 {
@@ -15,6 +18,7 @@ namespace Torneio.view.Controllers
         private TorneioEntities db = new TorneioEntities();
 
         // GET: Torneios
+        [Authorize(Roles = "Organizador")]
         public ActionResult Index()
         {
             List<usuarios_torneios> idsTorneios = (from p in db.usuarios_torneios where p.IDUsuario == 1 select p).ToList();
@@ -30,6 +34,7 @@ namespace Torneio.view.Controllers
         }
 
         // GET: Torneios/Details/5
+        [Authorize(Roles = "Organizador")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -45,6 +50,7 @@ namespace Torneio.view.Controllers
         }
 
         // GET: Torneios/Create
+        [Authorize(Roles = "Organizador")]
         public ActionResult Create()
         {
             return View();
@@ -55,6 +61,7 @@ namespace Torneio.view.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Organizador")]
         public ActionResult Create([Bind(Include = "ID,Nome,Premiacao,Ano,Realizador")] Torneios torneios, [Bind(Include = "IdUsuario")] usuarios_torneios usuarioTorneio, IEnumerable<int> IDTime)
         {
             if (ModelState.IsValid)
@@ -86,6 +93,7 @@ namespace Torneio.view.Controllers
         }
 
         // GET: Torneios/Edit/5
+        [Authorize(Roles = "Organizador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -105,6 +113,7 @@ namespace Torneio.view.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Organizador")]
         public ActionResult Edit([Bind(Include = "ID,Nome,Premiacao,Ano,Realizador")] Torneios torneios)
         {
             if (ModelState.IsValid)
@@ -117,6 +126,7 @@ namespace Torneio.view.Controllers
         }
 
         // GET: Torneios/Delete/5
+        [Authorize(Roles = "Organizador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -132,6 +142,7 @@ namespace Torneio.view.Controllers
         }
 
         // POST: Torneios/Delete/5
+        [Authorize(Roles = "Organizador")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -140,6 +151,19 @@ namespace Torneio.view.Controllers
             db.Torneios.Remove(torneios);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Tabela(int id)
+        {
+            List<Tabela> Tabela = montaTabela(id);
+            return View(Tabela);
+        }
+
+        public List<Tabela> montaTabela(int idTorneio)
+        {
+            int k = idTorneio;
+            TabelaRepository repository = new TabelaRepository();
+            return repository.montaTabela(idTorneio);
         }
 
         private List<Partidas> geraPartidas(int idTorneio, IEnumerable<int> idTimes)

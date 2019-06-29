@@ -1,0 +1,8 @@
+﻿.validation-summary-errors ul {
+    margin-bottom: 0;
+}
+
+body .form-label-group input:not(:placeholder-shown) {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}

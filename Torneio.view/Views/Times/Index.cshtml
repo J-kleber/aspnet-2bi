@@ -1,45 +1,70 @@
 ﻿@model IEnumerable<Torneio.model.Times>
-
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Emblema)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Sigla)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Emblema)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sigla)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
-
-</table>
+<div>
+    <a class="btn btn-primary" href="@Url.Action("Create")"><i class="fas fa-plus"></i> Novo</a>
+</div>
+<br />
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Times
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Emblema)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Sigla)
+                        </th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Emblema)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Sigla)
+                        </th>
+                        <th>Ações</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Emblema)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Sigla)
+                            </td>
+                            <td>
+                                <a class="btn btn-success" href="@Url.Action("Details", new { id = item.ID })"><i class="fas fa-eye"></i> Ver</a> &nbsp;
+                                <a class="btn btn-info" href="@Url.Action("Edit", new { id = item.ID })"><i class="fas fa-edit"></i> Editar</a> &nbsp;
+                                <a class="btn btn-danger" href="@Url.Action("Delete", new { id = item.ID })"><i class="fas fa-trash"></i> Excluir</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted"></div>
+</div>
