@@ -4,55 +4,36 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>Jogadores</h4>
+    <h4>Detalhes do Jogador</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Idade)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Idade)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Nacionalidade)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nacionalidade)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DataNascimento)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DataNascimento)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Times.Nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Times.Nome)
-        </dd>
-
-    </dl>
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th width="10%">@Html.DisplayNameFor(model => model.Nome)</th>
+                <td>@Html.DisplayFor(model => model.Nome)</td>
+            </tr>
+            <tr>
+                <th width="10%">@Html.DisplayNameFor(model => model.Idade)</th>
+                <td>@Html.DisplayFor(model => model.Idade)</td>
+            </tr>
+            <tr>
+                <th width="10%">@Html.DisplayNameFor(model => model.Nacionalidade)</th>
+                <td>@Html.DisplayFor(model => model.Nacionalidade)</td>
+            </tr>
+            <tr>
+                <th width="10%">@Html.DisplayNameFor(model => model.DataNascimento)</th>
+                <td>@Html.DisplayFor(model => model.DataNascimento)</td>
+            </tr>
+            <tr>
+                <th width="10%">@Html.DisplayNameFor(model => model.Times.Nome)</th>
+                <td>@Html.DisplayFor(model => model.Times.Nome)</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a class="btn btn-light" href="@Url.Action("Index")"><i class="fas fa-arrow-left"></i> Voltar</a> &nbsp;
+    <a class="btn btn-info" href="@Url.Action("Edit", new { id = Model.ID })"><i class="fas fa-edit"></i> Editar</a>
 </p>

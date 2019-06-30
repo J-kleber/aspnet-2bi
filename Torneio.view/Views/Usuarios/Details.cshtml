@@ -1,66 +1,42 @@
 ﻿@model Torneio.model.Usuarios
-
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>Usuarios</h4>
+    <h4>Detalhes do Usuário</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Senha)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Senha)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Tipo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tipo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ativo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ativo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sobrenome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sobrenome)
-        </dd>
-
-    </dl>
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th width="10%">@Html.DisplayNameFor(model => model.Email)</th>
+                <td>@Html.DisplayFor(model => model.Email)</td>
+            </tr>
+            <tr>
+                <th width="10%">@Html.DisplayNameFor(model => model.Senha)</th>
+                <td>@Html.DisplayFor(model => model.Senha)</td>
+            </tr>
+            <tr>
+                <th width="10%">@Html.DisplayNameFor(model => model.Tipo)</th>
+                <td>@Html.DisplayFor(model => model.Tipo)</td>
+            </tr>
+            <tr>
+                <th width="10%">@Html.DisplayNameFor(model => model.Ativo)</th>
+                <td>@Html.DisplayFor(model => model.Ativo)</td>
+            </tr>
+            <tr>
+                <th width="10%">@Html.DisplayNameFor(model => model.Nome)</th>
+                <td>@Html.DisplayFor(model => model.Nome)</td>
+            </tr>
+            <tr>
+                <th width="10%">@Html.DisplayNameFor(model => model.Sobrenome)</th>
+                <td>@Html.DisplayFor(model => model.Sobrenome)</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a class="btn btn-light" href="@Url.Action("Index")"><i class="fas fa-arrow-left"></i> Voltar</a> &nbsp;
+    <a class="btn btn-info" href="@Url.Action("Edit", new { id = Model.ID })"><i class="fas fa-edit"></i> Editar</a>
 </p>
