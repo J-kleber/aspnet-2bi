@@ -162,6 +162,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CadastroController.cs" />
     <Compile Include="Controllers\ContaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MinhasPartidasController.cs" />
@@ -230,6 +231,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\torneiojs.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -291,10 +293,17 @@
     <Content Include="Views\Usuarios\Index.cshtml" />
     <Content Include="Views\Torneios\Tabela.cshtml" />
     <Content Include="Views\MinhasPartidas\index.cshtml" />
+    <Content Include="Views\Times\Jogadores.cshtml" />
+    <Content Include="Views\Times\CreateUsuario.cshtml" />
+    <Content Include="Views\Times\Usuarios.cshtml" />
+    <Content Include="Views\Times\EditUsuario.cshtml" />
+    <Content Include="Views\Times\DeleteUsuario.cshtml" />
+    <Content Include="Views\Cadastro\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Helper\" />
+    <Folder Include="Imagens\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

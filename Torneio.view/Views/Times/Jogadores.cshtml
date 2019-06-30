@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Torneio.model.Jogadores>
+@{
+    ViewBag.Title = "Index";
+}
+<h2>index</h2>
+<table class="table">
+    <thead class="thead-dark">
+    <th scope="col">Nome</th>
+    <th scope="col">Idade</th>
+    <th scope="col">Nacionalidade</th>
+    <th scope="col">Data de nascimento</th>
+    <th scope="col">Time</th>
+    </thead>
+    <tbody>
+        @{
+            foreach (var dados in Model)
+            {
+                <tr>
+                    <td>@dados.Nome</td>
+                    <td>@dados.Idade</td>
+                    <td>@dados.Nacionalidade</td>
+                    <td>@dados.DataNascimento</td>
+                    <td>@dados.Times.Nome</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

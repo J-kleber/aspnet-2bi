@@ -16,20 +16,25 @@ namespace Torneio.view.Controllers
     public class TorneiosController : Controller
     {
         private TorneioEntities db = new TorneioEntities();
+        private TorneioRepository repository = new TorneioRepository();
 
         // GET: Torneios
         [Authorize(Roles = "Organizador")]
         public ActionResult Index()
         {
-            List<usuarios_torneios> idsTorneios = (from p in db.usuarios_torneios where p.IDUsuario == 1 select p).ToList();
+            UsuariosController ousuario = new UsuariosController();
+            int idUsuario = 0;
+            if (User.Identity.IsAuthenticated)
+            {
+                idUsuario = ousuario.getUsuario(User.Identity.Name).ID;
+            }
+            //List<usuarios_torneios> idsTorneios = (from p in db.usuarios_torneios where p.IDUsuario == idUsuario select p).ToList();
             List<Torneios> listaTorneios = new List<Torneios>();
-            foreach(var id in idsTorneios)
+            /*foreach(var id in idsTorneios)
             {
                 listaTorneios.Add((from p in db.Torneios where p.ID == id.IDTorneio select p).FirstOrDefault());
-            }
-
-
-
+            }*/
+            listaTorneios = this.selecionaTodos(idUsuario);
             return View(listaTorneios);
         }
 
@@ -78,8 +83,8 @@ namespace Torneio.view.Controllers
                     torneioTimes.IDTime = id;
                     db.Torneios_Times.Add(torneioTimes);
                 }
-
-                List<Partidas> partidas = geraPartidas(torneios.ID, IDTime);
+                PartidasController oPartidasController = new PartidasController();
+                List<Partidas> partidas = oPartidasController.geraPartidas(torneios.ID, IDTime);
                 foreach(Partidas partida in partidas)
                 {
                     db.Partidas.Add(partida);
@@ -114,10 +119,36 @@ namespace Torneio.view.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Organizador")]
-        public ActionResult Edit([Bind(Include = "ID,Nome,Premiacao,Ano,Realizador")] Torneios torneios)
+        public ActionResult Edit([Bind(Include = "ID,Nome,Premiacao,Ano,Realizador")] Torneios torneios, [Bind(Include = "IdUsuario")] usuarios_torneios usuarioTorneio, IEnumerable<int> IDTime, String GerarNova)
         {
             if (ModelState.IsValid)
             {
+
+                if(GerarNova == "sim")
+                {
+                    PartidasController oPartidasController = new PartidasController();
+                    oPartidasController.deletaPartidasTorneio(torneios.ID);
+                    var item = db.Times.ToList();
+                    db.Torneios.Add(torneios);
+                    usuarioTorneio.IDTorneio = torneios.ID;
+                    db.usuarios_torneios.Add(usuarioTorneio);
+
+                    foreach (var id in IDTime)
+                    {
+                        Torneios_Times torneioTimes = new Torneios_Times();
+                        torneioTimes.IDTorneio = torneios.ID;
+                        torneioTimes.IDTime = id;
+                        db.Torneios_Times.Add(torneioTimes);
+                    }
+                   
+                    List<Partidas> partidas = oPartidasController.geraPartidas(torneios.ID, IDTime);
+                    foreach (Partidas partida in partidas)
+                    {
+                        db.Partidas.Add(partida);
+                    }
+                }
+              
+
                 db.Entry(torneios).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -166,61 +197,9 @@ namespace Torneio.view.Controllers
             return repository.montaTabela(idTorneio);
         }
 
-        private List<Partidas> geraPartidas(int idTorneio, IEnumerable<int> idTimes)
+        public List<Torneios> selecionaTodos(int idUsuario)
         {
-            List<int> times = new List<int>();
-            int index = 0;
-            foreach (var id in idTimes)
-            {
-                times.Insert(index, id);
-                index++;
-            }
-
-            if (times.Count % 2 == 1)
-            {
-                times.Insert(0, 0);
-            }
-            int t = times.Count;
-            int m = times.Count / 2;
-
-            List<Partidas> Partidas = new List<Partidas>();
-            
-            for (int i = 0; i < t - 1; i++)
-            {
-                for (int j = 0; j < m; j++)
-                {
-                    Partidas p = new Partidas();
-                    p.IDTorneio = idTorneio;
-                    p.Rodada = i + 1;
-
-                    //Clube está de fora nessa rodada?
-                    if (times[j] == 0)
-                    {
-                        continue;
-                    }
-
-                    //Teste para ajustar o mando de campo
-                    if (j % 2 == 1 || i % 2 == 1 && j == 0)
-                    {
-                        p.IDTime1 = times[t - j - 1];
-                        p.IDTime2 = times[j];
-                    }
-                    else
-                    {
-                        p.IDTime1 = times[j];
-                        p.IDTime2 = times[t - j - 1];
-                    }
-                    int ads = p.IDTime1;
-                    int dasd = p.IDTime2;
-                    Partidas.Add(p);
-                }
-                //Gira os clubes no sentido horário, mantendo o primeiro no lugar
-                int asa = times.Count - 1;
-                int k = times[asa];
-                times.Remove(times[asa]);
-                times.Insert(1, k);
-            }
-            return Partidas;
+            return this.repository.selecionaTodos(idUsuario);
         }
 
         protected override void Dispose(bool disposing)

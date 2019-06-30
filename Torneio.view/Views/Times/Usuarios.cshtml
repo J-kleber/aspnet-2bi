@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Torneio.model.Usuarios>
+
+@{
+    ViewBag.Title = "Index";
+    string url = HttpContext.Current.Request.Url.ToString();
+    var novaUrl = url.Split('/');
+    string idTime = novaUrl[novaUrl.Count() - 1];
+}
+<h2>Index</h2>
+<p>
+    @Html.ActionLink("Create New", "CreateUsuario/"+@idTime)
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Senha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ativo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sobrenome)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.Tipo == "Times")
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Senha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tipo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ativo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sobrenome)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditUsuario", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "DeleteUsuario", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    }
+</table>

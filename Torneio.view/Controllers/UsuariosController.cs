@@ -7,11 +7,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Torneio.model;
+using Torneio.model.Repositories;
 namespace Torneio.view.Controllers
 {
     public class UsuariosController : Controller
     {
         private TorneioEntities db = new TorneioEntities();
+        private UsuarioRepository repository = new UsuarioRepository();
 
         // GET: Usuarios
         public ActionResult Index()
@@ -49,8 +51,20 @@ namespace Torneio.view.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Usuarios.Add(usuarios);
-                db.SaveChanges();
+                int id = 0;
+                try
+                {
+                    id = this.getUsuario(usuarios.Email).ID;
+                }catch(Exception e)
+                {
+                    id = 0;
+                }
+               
+                if (id == 0)
+                {
+                    db.Usuarios.Add(usuarios);
+                    db.SaveChanges();
+                }
                 return RedirectToAction("Index");
             }
 
@@ -124,6 +138,17 @@ namespace Torneio.view.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public void InsereUsuarioTime(usuarios_times oUsuariosTimes)
+        {
+            db.usuarios_times.Add(oUsuariosTimes);
+            db.SaveChanges();
+        }
+
+        public List<Usuarios> usuariosTime(int idTime)
+        {
+            return this.repository.usuariosTime(idTime);
         }
     }
 }
