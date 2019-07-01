@@ -19,7 +19,7 @@ namespace Torneio.view.Controllers
         private TorneioRepository repository = new TorneioRepository();
 
         // GET: Torneios
-        [Authorize(Roles = "Organizador")]
+        //[Authorize(Roles = "Organizador")]
         public ActionResult Index()
         {
             UsuariosController ousuario = new UsuariosController();

@@ -1,3 +1,10 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (User.IsInRole("Organizador"))
+    {
+        Layout = "~/Views/Shared/LayoutBootstrap.cshtml";
+    }
+    else if (User.IsInRole("Times"))
+    {
+        Layout = "~/Views/Shared/LayoutBootstrapTime.cshtml";
+    }
 }

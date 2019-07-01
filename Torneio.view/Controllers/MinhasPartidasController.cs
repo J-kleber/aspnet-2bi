@@ -18,7 +18,7 @@ namespace Torneio.view.Controllers
         private TorneioEntities db = new TorneioEntities();
         private PartidaRepository repository = new PartidaRepository();
         // GET: Partidas
-        [Authorize(Roles = "Time")]
+        [Authorize(Roles = "Times")]
         public ActionResult Index()
         {
             UsuariosController ousuario = new UsuariosController();

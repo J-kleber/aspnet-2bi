@@ -26,6 +26,12 @@ namespace Torneio.view.Controllers
             return View();
         }
 
+        public ActionResult PainelTime()
+        {
+            return View();
+        }
+
+
         /// <param name = "login" ></ param >
         /// < param name="returnUrl"></param>
         /// <returns></returns>

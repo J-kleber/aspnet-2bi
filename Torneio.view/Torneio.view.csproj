@@ -299,6 +299,9 @@
     <Content Include="Views\Times\EditUsuario.cshtml" />
     <Content Include="Views\Times\DeleteUsuario.cshtml" />
     <Content Include="Views\Cadastro\index.cshtml" />
+    <Content Include="Views\Shared\LayoutBootstrap.cshtml" />
+    <Content Include="Views\Shared\LayoutBootstrapTime.cshtml" />
+    <Content Include="Views\Conta\PainelTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

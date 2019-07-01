@@ -16,7 +16,7 @@ namespace Torneio.view.Controllers
         private TorneioEntities db = new TorneioEntities();
         private PartidaRepository repository = new PartidaRepository();
         // GET: Partidas
-        [Authorize(Roles = "Organizador")]
+        //[Authorize(Roles = "Organizador")]
         public ActionResult Index(int? id)
         {
             if(id > 0)
