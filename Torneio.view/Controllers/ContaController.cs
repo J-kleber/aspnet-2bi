@@ -31,7 +31,6 @@ namespace Torneio.view.Controllers
             return View();
         }
 
-
         /// <param name = "login" ></ param >
         /// < param name="returnUrl"></param>
         /// <returns></returns>
@@ -105,6 +104,29 @@ namespace Torneio.view.Controllers
             /*Caso os campos não esteja de acordo com a solicitação retorna a tela de login 
             com as mensagem dos campos*/
             return View(login);
+        }
+
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
+            Session.Clear();  // This may not be needed -- but can't hurt
+            Session.Abandon();
+
+            // Clear authentication cookie
+            HttpCookie rFormsCookie = new HttpCookie(FormsAuthentication.FormsCookieName, "");
+            rFormsCookie.Expires = DateTime.Now.AddYears(-1);
+            Response.Cookies.Add(rFormsCookie);
+
+            // Clear session cookie 
+            HttpCookie rSessionCookie = new HttpCookie("ASP.NET_SessionId", "");
+            rSessionCookie.Expires = DateTime.Now.AddYears(-1);
+            Response.Cookies.Add(rSessionCookie);
+          
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
+
+            // Redirect to the Home Page (that should be intercepted and redirected to the Login Page first)
+            return RedirectToAction("Index", "Home");
         }
     }
 }
