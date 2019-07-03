@@ -1,66 +1,84 @@
 ﻿@model Torneio.model.Torneios
-
+@using Torneio.view.Controllers;
 @{
     ViewBag.Title = "Edit";
+    UsuariosController ousuario = new UsuariosController();
+    int idUsuario = 0;
+    TimesController oTimes = new TimesController();
+    if (User.Identity.IsAuthenticated)
+    {
+        idUsuario = ousuario.getUsuario(User.Identity.Name).ID;
+    }
 }
-
-<h2>Edit</h2>
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Torneios</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Premiacao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Premiacao, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Premiacao, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ano, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Ano, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ano, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Realizador, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Realizador, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Realizador, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+<div class="form-horizontal">
+    <h4>Editar Torneio</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID)
+    <div class="row">
+        <div class="col-md-12">
+            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
         </div>
     </div>
-}
+    <div class="row">
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Premiacao, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Premiacao, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Premiacao, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Ano, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Ano, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Ano, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(model => model.Realizador, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Realizador, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Realizador, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <label for="GerarNova">Gerar novas Partidas</label>
+            <input id="GerarNova" name="GerarNova" type="checkbox" value="sim" />
+        </div>
+    </div>
+    <div class="row">
+        <label class="control-label col-md-2" for="IdUsuario" hidden>IdUsuario</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" id="IdUsuario" name="IdUsuario" type="text" value="@idUsuario" hidden>
+            <span class="field-validation-valid text-danger" data-valmsg-for="IdUsuario" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+    <div class="row mt-2 p-1 pl-4 form-row times" hidden>
+        @{
+            foreach (var time in oTimes.selecionaTodos(idUsuario))
+            {
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+                <div class="col-md-4">
+                    <input type="checkbox" class="form-check-input" id="IDTime[]" name="IDTime[]" value="@time.ID">
+                    <label class="form-check-label" for="exampleCheck1">@time.Nome</label>
+                </div>
+
+            }
+        }
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-offset-2 col-md-12">
+            <a class="btn btn-light" href="@Url.Action("Index")"><i class="fas fa-arrow-left"></i> Voltar</a> &nbsp;
+            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Salvar</button>
+        </div>
+    </div>
 </div>
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/scripts/torneiojs.js")
 }

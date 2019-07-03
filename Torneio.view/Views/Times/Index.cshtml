@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Index";
 }
+
 <div>
     <a class="btn btn-primary" href="@Url.Action("Create")"><i class="fas fa-plus"></i> Novo</a>
 </div>
@@ -50,7 +51,7 @@
                                 @Html.DisplayFor(modelItem => item.Nome)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Emblema)
+                                <img width="80px" height="auto" src="@item.Emblema" />
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Sigla)
@@ -58,7 +59,9 @@
                             <td>
                                 <a class="btn btn-success" href="@Url.Action("Details", new { id = item.ID })"><i class="fas fa-eye"></i> Ver</a> &nbsp;
                                 <a class="btn btn-info" href="@Url.Action("Edit", new { id = item.ID })"><i class="fas fa-edit"></i> Editar</a> &nbsp;
-                                <a class="btn btn-danger" href="@Url.Action("Delete", new { id = item.ID })"><i class="fas fa-trash"></i> Excluir</a>
+                                <a class="btn btn-danger" href="@Url.Action("Delete", new { id = item.ID })"><i class="fas fa-trash"></i> Excluir</a> &nbsp;
+                                <a class="btn btn-light" href="@Url.Action("Jogadores", new { id = item.ID })"><i class="fas fa-users"></i> Jogadores</a> &nbsp;
+                                <a class="btn btn-light" href="@Url.Action("Usuarios", new { id = item.ID })"><i class="fas fa-user"></i> Usuários</a>
                             </td>
                         </tr>
                     }

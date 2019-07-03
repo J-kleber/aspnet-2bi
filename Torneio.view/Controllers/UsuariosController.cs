@@ -7,19 +7,23 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Torneio.model;
+using Torneio.model.Repositories;
 namespace Torneio.view.Controllers
 {
     public class UsuariosController : Controller
     {
         private TorneioEntities db = new TorneioEntities();
+        private UsuarioRepository repository = new UsuarioRepository();
 
         // GET: Usuarios
+        [Authorize(Roles = "Organizador")]
         public ActionResult Index()
         {
             return View(db.Usuarios.ToList());
         }
 
         // GET: Usuarios/Details/5
+        [Authorize(Roles = "Organizador")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,6 +39,7 @@ namespace Torneio.view.Controllers
         }
 
         // GET: Usuarios/Create
+        [Authorize(Roles = "Organizador")]
         public ActionResult Create()
         {
             return View();
@@ -45,12 +50,27 @@ namespace Torneio.view.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Email,Senha,Tipo,Ativo,Nome,Sobrenome")] Usuarios usuarios)
+        [Authorize(Roles = "Organizador")]
+        public ActionResult Create([Bind(Include = "ID,Email,Senha,Nome,Sobrenome")] Usuarios usuarios)
         {
             if (ModelState.IsValid)
             {
-                db.Usuarios.Add(usuarios);
-                db.SaveChanges();
+                int id = 0;
+                try
+                {
+                    id = this.getUsuario(usuarios.Email).ID;
+                }catch(Exception e)
+                {
+                    id = 0;
+                }
+               
+                if (id == 0)
+                {
+                    usuarios.Tipo = "Organizador";
+                    usuarios.Ativo = "S";
+                    db.Usuarios.Add(usuarios);
+                    db.SaveChanges();
+                }
                 return RedirectToAction("Index");
             }
 
@@ -58,6 +78,7 @@ namespace Torneio.view.Controllers
         }
 
         // GET: Usuarios/Edit/5
+        [Authorize(Roles = "Organizador")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -77,10 +98,13 @@ namespace Torneio.view.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Email,Senha,Tipo,Ativo,Nome,Sobrenome")] Usuarios usuarios)
+        [Authorize(Roles = "Organizador")]
+        public ActionResult Edit([Bind(Include = "ID,Email,Senha,Nome,Sobrenome")] Usuarios usuarios)
         {
             if (ModelState.IsValid)
             {
+                usuarios.Tipo = "Organizador";
+                usuarios.Ativo = "S";
                 db.Entry(usuarios).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -89,6 +113,7 @@ namespace Torneio.view.Controllers
         }
 
         // GET: Usuarios/Delete/5
+        [Authorize(Roles = "Organizador")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -106,6 +131,7 @@ namespace Torneio.view.Controllers
         // POST: Usuarios/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Organizador")]
         public ActionResult DeleteConfirmed(int id)
         {
             Usuarios usuarios = db.Usuarios.Find(id);
@@ -124,6 +150,17 @@ namespace Torneio.view.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public void InsereUsuarioTime(usuarios_times oUsuariosTimes)
+        {
+            db.usuarios_times.Add(oUsuariosTimes);
+            db.SaveChanges();
+        }
+
+        public List<Usuarios> usuariosTime(int idTime)
+        {
+            return this.repository.usuariosTime(idTime);
         }
     }
 }

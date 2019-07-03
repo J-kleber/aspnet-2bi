@@ -1,53 +1,95 @@
 ﻿@model IEnumerable<Torneio.model.Torneios>
-
+@using Torneio.view.Controllers
+@using Torneio.model
 @{
     ViewBag.Title = "Index";
+    UsuariosController ousuario = new UsuariosController();
+    string tipoUsuario = "";
+    string hidden = "";
+    if (User.Identity.IsAuthenticated)
+    {
+        Usuarios oUsuario = ousuario.getUsuario(User.Identity.Name);
+        tipoUsuario = oUsuario.Tipo;
+    }
 }
+<div>
+    <a class="btn btn-primary" href="@Url.Action("Create")"><i class="fas fa-plus"></i> Novo</a>
+</div>
+<br />
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Times
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Premiacao)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Ano)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Realizador)
+                        </th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Premiacao)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Ano)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Realizador)
+                        </th>
+                        <th>Ações</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Premiacao)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Ano)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Realizador)
+                            </td>
+                            <td>
+                                @if (User.IsInRole("Organizador"))
+                                {
+                                    <a class="btn btn-success" href="@Url.Action("Details", new { id = item.ID })"><i class="fas fa-eye"></i> Ver</a>
+                                    <a class="btn btn-info" href="@Url.Action("Edit", new { id = item.ID })"><i class="fas fa-edit"></i> Editar</a>
+                                    <a class="btn btn-danger" href="@Url.Action("Delete", new { id = item.ID })"><i class="fas fa-trash"></i> Excluir</a>
+                                }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Premiacao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Ano)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Realizador)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Premiacao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ano)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Realizador)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID }) |
-            @Html.ActionLink("Tabela", "Tabela", new { id = item.ID }) |
-            @Html.ActionLink("Partidas", "Partidas", new { id = item.ID })
-        </td>
-    </tr>
-}
-
-</table>
+                                <a class="btn btn-light" href="@Url.Action("Tabela", new { id = item.ID })"><i class="fas fa-table"></i> Tabela</a>
+                                <a class="btn btn-light" href="@Url.Action("Index", "Partidas", new { id = item.ID })"><i class="fas fa-clipboard-list"></i> Partidas</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted"></div>
+</div>

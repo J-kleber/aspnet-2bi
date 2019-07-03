@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Torneio.model.Usuarios>
+@{
+    ViewBag.Title = "Index";
+    string url = HttpContext.Current.Request.Url.ToString();
+    var novaUrl = url.Split('/');
+    string idTime = novaUrl[novaUrl.Count() - 1];
+}
+
+<div>
+    <a class="btn btn-primary" href="@Url.Action("CreateUsuario/" + @idTime)"><i class="fas fa-plus"></i> Novo</a>
+</div>
+<br />
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Usuários
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Tipo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Ativo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Sobrenome)
+                        </th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Tipo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Ativo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Sobrenome)
+                        </th>
+                        <th>Ações</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Tipo == "Times")
+                        {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tipo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ativo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sobrenome)
+                        </td>
+                        <td>
+                            <a class="btn btn-info" href="@Url.Action("EditUsuario", new { id = item.ID })"><i class="fas fa-edit"></i> Editar</a> &nbsp;
+                            <a class="btn btn-danger" href="@Url.Action("DeleteUsuario", new { id = item.ID })"><i class="fas fa-trash"></i> Excluir</a>
+                        </td>
+                    </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted"></div>
+</div>

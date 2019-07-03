@@ -1,5 +1,4 @@
 ﻿@model Torneio.model.Times
-
 @{
     ViewBag.Title = "Details";
 }
@@ -19,7 +18,7 @@
             </tr>
             <tr>
                 <th width="10%">@Html.DisplayNameFor(model => model.Emblema)</th>
-                <td>@Html.DisplayFor(model => model.Emblema)</td>
+                <td><img width="80px" height="auto" src="~/@Model.Emblema" /></td>
             </tr>
         </tbody>
     </table>

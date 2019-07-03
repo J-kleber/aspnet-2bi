@@ -3,21 +3,21 @@
     ViewBag.Title = "index";
     int idTorneio = 0;
 }
-<h2>index</h2>
+<h4>Minhas Partidas</h4>
 <table class="table">
     <thead class="thead-dark">
     <th scope="col">Rodada</th>
-    <th scope="col">Time</th>
-    <th scope="col">gols</th>
-    <th scope="col">gols</th>
-    <th scope="col">time</th>
-    <th scope="col">Data</th>
+    <th scope="col" width="10%">Time de Casa</th>
+    <th scope="col"></th>
+    <th scope="col"></th>
+    <th scope="col"></th>
+    <th scope="col">Time de Fora</th>
     </thead>
     <tbody>
         @{
             foreach (var dados in Model)
             {
-                if(idTorneio != dados.IDTorneio)
+                if (idTorneio != dados.IDTorneio)
                 {
                     idTorneio = dados.IDTorneio;
                     <tr>
@@ -28,9 +28,9 @@
                     <td>@dados.Rodada</td>
                     <td>@dados.TimeCasa</td>
                     <td>@dados.PlacarTime1</td>
+                    <td>x</td>
                     <td>@dados.PlacarTime2</td>
                     <td>@dados.TimeFora</td>
-                    <td>@dados.DataHora</td>
                 </tr>
             }
         }

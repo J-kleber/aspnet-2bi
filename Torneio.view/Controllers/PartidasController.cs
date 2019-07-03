@@ -7,25 +7,26 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Torneio.model;
+using Torneio.model.Repositories;
 
 namespace Torneio.view.Controllers
 {
     public class PartidasController : Controller
     {
         private TorneioEntities db = new TorneioEntities();
-
+        private PartidaRepository repository = new PartidaRepository();
         // GET: Partidas
-        [Authorize(Roles = "Organizador")]
+        //[Authorize(Roles = "Organizador")]
         public ActionResult Index(int? id)
         {
             if(id > 0)
             {
-                var partidas = db.Partidas.Include(p => p.Times).Include(p => p.Times1).Include(p => p.Torneios).Where(p => p.IDTorneio == id);
+                var partidas = this.partidasTorneioComID(id);
                 return View(partidas.ToList());
             }
             else
             {
-                var partidas = db.Partidas.Include(p => p.Times).Include(p => p.Times1).Include(p => p.Torneios);
+                var partidas = this.partidasTorneioSemID();
                 return View(partidas.ToList());
             }
           
@@ -154,6 +155,31 @@ namespace Torneio.view.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public List<Partidas> partidasTorneioComID(int? idTorneio)
+        {
+            return this.repository.partidasTorneioComID(idTorneio);
+        }
+
+        public List<Partidas> partidasTorneioSemID()
+        {
+            return this.repository.partidasTorneioSemID();
+        }
+
+        public List<Partidas> geraPartidas(int idTorneio, IEnumerable<int> idTimes)
+        {
+            return this.repository.geraPartidas(idTorneio, idTimes);
+        }
+
+        public void deletaPartidasTorneio(int idTorneio)
+        {
+            this.repository.deletaPartidasTorneio(idTorneio);
+        }
+
+        public void deletaPartidasTime(int idTime)
+        {
+            this.repository.deletaPartidasTime(idTime);
         }
     }
 }

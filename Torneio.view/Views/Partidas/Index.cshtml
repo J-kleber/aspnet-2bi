@@ -3,34 +3,26 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
-
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a class="btn btn-light" href="@Url.Action("Index", "Torneios")"><i class="fas fa-arrow-left"></i> Voltar</a>
 </p>
+<h4>Partidas</h4>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Rodada)
         </th>
+        <th width="10%">
+            Time de Casa
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
         <th>
-            @Html.DisplayNameFor(model => model.PlacarTime1)
+            Time de Fora
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PlacarTime2)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DataHora)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Times.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Times1.Nome)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Torneios.Nome)
+            Torneio
         </th>
         <th></th>
     </tr>
@@ -41,16 +33,14 @@
             @Html.DisplayFor(modelItem => item.Rodada)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Times.Nome)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.PlacarTime1)
         </td>
+        <td>x</td>
         <td>
             @Html.DisplayFor(modelItem => item.PlacarTime2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DataHora)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Times.Nome)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Times1.Nome)
@@ -59,11 +49,12 @@
             @Html.DisplayFor(modelItem => item.Torneios.Nome)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            <a class="btn btn-info" href="@Url.Action("Edit", new { id = item.ID })"><i class="fas fa-edit"></i> Editar</a>
         </td>
     </tr>
 }
 
 </table>
+<p>
+    <a class="btn btn-light" href="@Url.Action("Index", "Torneios")"><i class="fas fa-arrow-left"></i> Voltar</a>
+</p>

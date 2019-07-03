@@ -20,5 +20,6 @@ namespace Torneio.model.Repositories
         {
             return (from p in db.Times join a in db.usuarios_times on p.ID equals a.IDTime where a.IDUsuario == idUsuario select p).ToList();
         }
+
     }
 }

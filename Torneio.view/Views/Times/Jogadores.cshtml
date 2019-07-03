@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Torneio.model.Jogadores>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div>
+    <a class="btn btn-primary" href="@Url.Action("Create", "Jogadores")"><i class="fas fa-plus"></i> Novo</a>
+</div>
+<br />
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Jogadores
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Idade)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nacionalidade)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataNascimento)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Times.Nome)
+                        </th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Idade)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nacionalidade)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataNascimento)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Times.Nome)
+                        </th>
+                        <th>Ações</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Idade)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nacionalidade)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DataNascimento)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Times.Nome)
+                            </td>
+                            <td>
+                                <a class="btn btn-success" href="@Url.Action("Details", "Jogadores", new { id = item.ID })"><i class="fas fa-eye"></i> Ver</a> &nbsp;
+                                <a class="btn btn-info" href="@Url.Action("Edit", "Jogadores", new { id = item.ID })"><i class="fas fa-edit"></i> Editar</a> &nbsp;
+                                <a class="btn btn-danger" href="@Url.Action("Delete", "Jogadores", new { id = item.ID })"><i class="fas fa-trash"></i> Excluir</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer small text-muted"></div>
+</div>

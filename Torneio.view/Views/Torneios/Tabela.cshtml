@@ -2,18 +2,21 @@
 @{
     ViewBag.Title = "index";
 }
-
+<p>
+    <a class="btn btn-light" href="@Url.Action("Index")"><i class="fas fa-arrow-left"></i> Voltar</a>
+</p>
+<h4>Classificação</h4>
 <table class="table">
     <thead class="thead-dark">
-        <th scope="col"></th>
-        <th scope="col">Nome</th>
-        <th scope="col">Pontos</th>
-        <th scope="col">Vitórias</th>
-        <th scope="col">Empates</th>
-        <th scope="col">Derrotas</th>
-        <th scope="col">Gols</th>
-        <th scope="col">Gols Tomados</th>
-        <th scope="col">Saldo de Gols</th>
+    <th scope="col" width="2%"></th>
+    <th scope="col" width="10%">Nome</th>
+    <th scope="col" width="2%">Pontos</th>
+    <th scope="col" width="2%">Vitórias</th>
+    <th scope="col" width="2%">Empates</th>
+    <th scope="col" width="2%">Derrotas</th>
+    <th scope="col" width="2%">Gols</th>
+    <th scope="col" width="5%">Gols Sofridos</th>
+    <th scope="col" width="10%">Saldo de Gols</th>
     </thead>
     <tbody>
         @{
@@ -34,3 +37,7 @@
         }
     </tbody>
 </table>
+
+<p>
+    <a class="btn btn-light" href="@Url.Action("Index")"><i class="fas fa-arrow-left"></i> Voltar</a>
+</p>

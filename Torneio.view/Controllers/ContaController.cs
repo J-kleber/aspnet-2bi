@@ -26,6 +26,12 @@ namespace Torneio.view.Controllers
             return View();
         }
 
+        public ActionResult PainelTime()
+        {
+            return View();
+        }
+
+
         /// <param name = "login" ></ param >
         /// < param name="returnUrl"></param>
         /// <returns></returns>
@@ -66,7 +72,7 @@ namespace Torneio.view.Controllers
                                 /*código abaixo cria uma session para armazenar o sobrenome do usuário*/
                                 Session["Sobrenome"] = vLogin.Sobrenome;
                                 /*retorna para a tela inicial do Home*/
-                                return RedirectToAction("Painel", "Conta");
+                                return RedirectToAction("Index", "Home");
                             }
                             /*Else responsável da validação da senha*/
                             else

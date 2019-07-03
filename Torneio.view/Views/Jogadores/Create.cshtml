@@ -1,5 +1,6 @@
 ﻿@model Torneio.model.Jogadores
 @using Torneio.view.Controllers;
+@using Torneio.model.Repositories;
 @{
     ViewBag.Title = "Create";
     UsuariosController ousuario = new UsuariosController();
@@ -20,7 +21,6 @@
         <h4>Novo Jogador</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
         <div class="row">
             <div class="col-md-10">
                 @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label" })
@@ -33,7 +33,6 @@
                 @Html.ValidationMessageFor(model => model.Idade, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-4">
                 @Html.LabelFor(model => model.Nacionalidade, htmlAttributes: new { @class = "control-label" })
@@ -42,29 +41,29 @@
             </div>
             <div class="col-md-4">
                 @Html.LabelFor(model => model.DataNascimento, htmlAttributes: new { @class = "control-label" })
-                <input class="form-control text-box single-line valid" data-val="true" data-val-date="O campo DataNascimento deve ser uma data." data-val-required="O campo DataNascimento é obrigatório." id="DataNascimento" name="DataNascimento" type="date" value="" aria-describedby="DataNascimento-error" aria-invalid="false">
+                @Html.EditorFor(model => model.DataNascimento, new { htmlAttributes = new { @class = "form-control", type="date" } })
                 @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })
             </div>
-        </div>
-
-        <div class="row">
-            <label class="control-label" for="IDTime" hidden>IdUsuario</label>
-            <div class="col-md-12">
+            <div class="col-md-4">
+                <label class="control-label col-md-2" for="IDTime" hidden>IdUsuario</label>
                 <input class="form-control text-box single-line" id="IDTime" name="IDTime" type="text" value="@idTime" hidden>
                 <span class="field-validation-valid text-danger" data-valmsg-for="IDTime" data-valmsg-replace="true"></span>
             </div>
         </div>
-
-         <br />
+        <br />
         <div class="row">
             <div class="col-md-offset-2 col-md-12">
                 <a class="btn btn-light" href="@Url.Action("Index")"><i class="fas fa-arrow-left"></i> Voltar</a> &nbsp;
-                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Criar</button>
+                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Salvar</button>
             </div>
         </div>
         <br />
     </div>
 }
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

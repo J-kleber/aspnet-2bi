@@ -1,50 +1,34 @@
 ﻿@model Torneio.model.Torneios
-
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>Torneios</h4>
+    <h4>Detalhes do Torneio</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Premiacao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Premiacao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ano)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ano)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Realizador)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Realizador)
-        </dd>
-
-    </dl>
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th width="10%">@Html.DisplayNameFor(model => model.Nome)</th>
+                <td>@Html.DisplayFor(model => model.Nome)</td>
+            </tr>
+            <tr>
+                <th width="10%">@Html.DisplayNameFor(model => model.Premiacao)</th>
+                <td>@Html.DisplayFor(model => model.Premiacao)</td>
+            </tr>
+            <tr>
+                <th width="10%">@Html.DisplayNameFor(model => model.Ano)</th>
+                <td>@Html.DisplayFor(model => model.Ano)</td>
+            </tr>
+            <tr>
+                <th width="10%">@Html.DisplayNameFor(model => model.Realizador)</th>
+                <td>@Html.DisplayFor(model => model.Realizador)</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a class="btn btn-light" href="@Url.Action("Index")"><i class="fas fa-arrow-left"></i> Voltar</a> &nbsp;
+    <a class="btn btn-info" href="@Url.Action("Edit", new { id = Model.ID })"><i class="fas fa-edit"></i> Editar</a>
 </p>
